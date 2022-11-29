@@ -463,7 +463,8 @@ public static void placeOrder(Retail esql) {
 			query = String.format("INSERT INTO Orders (customerID, storeID, productName, unitsOrdered) VALUES ('%s', '%s', '%s', '%s', '%s')", esql.authorisedUser.get(0), id, product, unitno, ts.toString());
 			esql.executeUpdate(query);
 			
-			query = String.format("update product set numberOfUnits = %d where productName = %s and storeid = %s", re.get(1).get(2) - unitno, product, id);
+			int up = Integer.parseInt(re.get(1).get(2)) - Integer.parseInt(unitno); //change both value into int to calculate
+			query = String.format("update product set numberOfUnits = %d where productName = %s and storeid = %s", up, product, id);
 			
 			System.out.println("Order succefully processed!");
 		}
